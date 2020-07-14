@@ -16,7 +16,7 @@ const routes = [
         path: '/',
         component: Products,
         meta: {
-          title: 'Product Viewer'
+          title: 'Producs'
         }
       },
     ]

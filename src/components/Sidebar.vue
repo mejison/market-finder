@@ -1,48 +1,87 @@
 <template>
-  <!-- Sidenav -->
-  <nav
-    class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white"
-    id="sidenav-main"
-  >
-    <div class="scrollbar-inner">
-      <!-- Brand -->
-      <div class="sidenav-header align-items-center">
-        <a class="navbar-brand" href="javascript:void(0)">
-          <img src="/assets/img/brand/blue.png" class="navbar-brand-img" alt="..." />
-        </a>
-      </div>
-      <div class="navbar-inner">
-        <!-- Collapse -->
-        <div class="collapse navbar-collapse" id="sidenav-collapse-main">
-          <!-- Nav items -->
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="dashboard.html">
-                <i class="ni ni-tv-2 text-primary"></i>
-                <span class="nav-link-text">Dashboard</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="icons.html">
-                <i class="ni ni-planet text-orange"></i>
-                <span class="nav-link-text">Icons</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="map.html">
-                <i class="ni ni-pin-3 text-primary"></i>
-                <span class="nav-link-text">Google</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="profile.html">
-                <i class="ni ni-single-02 text-yellow"></i>
-                <span class="nav-link-text">Profile</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </nav>
+  <side-bar>
+    <template slot="links">
+      <sidebar-item
+        :link="{ name: 'Research', icon: 'ni ni-ungroup text-orange', collapsed: false }"
+      >
+        <sidebar-item
+          :link="{
+            name: 'Products Research',
+            path: '/products/research'
+          }"
+        ></sidebar-item>
+        <sidebar-item
+          :link="{
+            name: 'Sellers Research',
+            path: '/sellers/research'
+          }"
+        ></sidebar-item>
+        <sidebar-item
+          :link="{
+            name: 'Scrapping Tasks',
+            path: '/tasks'
+          }"
+        ></sidebar-item>
+      </sidebar-item>
+      <sidebar-item
+        :link="{ name: 'Prepare', icon: 'ni ni-ungroup text-orange', collapsed: false }"
+      >
+        <sidebar-item
+          :link="{
+            name: 'Saved Products',
+            path: '/products/saved'
+          }"
+        ></sidebar-item>
+        <sidebar-item
+          :link="{
+            name: 'Manage sources',
+            path: '/sources'
+          }"
+        ></sidebar-item>
+      </sidebar-item>
+      <sidebar-item :link="{ name: 'Sell', icon: 'ni ni-ungroup text-orange', collapsed: false }">
+        <sidebar-item
+          :link="{
+            name: 'Your lists',
+            icon: 'ni ni-align-left-2 text-default',
+            path: '/products/lists'
+          }"
+        ></sidebar-item>
+        <sidebar-item
+          :link="{
+            name: 'Your orders',
+            icon: 'ni ni-align-left-2 text-default',
+            path: '/orders'
+          }"
+        ></sidebar-item>
+        <sidebar-item
+          :link="{
+            name: 'Your Seller Accounts',
+            icon: 'ni ni-align-left-2 text-default',
+            path: '/platforms'
+          }"
+        ></sidebar-item>
+      </sidebar-item>
+    </template>
+  </side-bar>
 </template>
+
+<script>
+export default {
+  name: "sidebar"
+};
+</script>
+
+<style lang="scss">
+.sidebar-menu-item {
+  .nav-link-text {
+    font-size: 14px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #601ed1;
+  }
+}
+</style>

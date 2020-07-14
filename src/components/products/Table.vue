@@ -5,13 +5,14 @@
         <thead class="thead-light">
           <tr>
             <th>
-              <input type="checkbox" />
+              <input type="checkbox" @change="onSelectAll($event.target.checked)" />
             </th>
             <th
               class="column"
               v-for="(column, index) in columns"
               :key="index"
               :class="{'up': column.field == sort.field && sort.type == 'desc', 'down': column.field == sort.field && sort.type == 'asc'}"
+              :style="column.style"
             >
               {{ column.label }}
               <a
@@ -28,56 +29,49 @@
         <tbody class="list">
           <tr v-for="(row, index) in data" :key="index">
             <td>
-              <input type="checkbox" />
+              <input type="checkbox" :checked="isChecked[row.id]" @click="onToggleSelected(row)" />
             </td>
-            <th v-for="(column, index2) in columns" :key="index2">
+            <th
+              v-for="(column, index2) in columns"
+              :key="index2"
+              :class="{'centered': column.centered}"
+            >
               <slot v-if="column.styled" :name="column.field" :row="row" :data="row[column.field]"></slot>
               <div v-else>{{ row[column.field] }}</div>
             </th>
-            <td></td>
+            <td>
+              <actions />
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="card-footer py-4">
-      <nav>
-        <ul class="pagination justify-content-end mb-0">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">
-              <i class="fas fa-angle-left"></i>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          <li class="page-item active">
-            <a class="page-link" href="#">1</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              2
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">3</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              <i class="fas fa-angle-right"></i>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+    <pagination
+      :total="pagination.total"
+      :page="pagination.page"
+      :from="pagination.from"
+      :to="pagination.to"
+      :per-page="pagination.per_page"
+      @change="onChangePage"
+      @next="onChangePage"
+      @prev="onChangePage"
+    />
   </div>
 </template>
 
 <script>
 import icons from "@/icons";
+import Actions from "./Actions.vue";
+import Pagination from "./Pagination.vue";
 
 export default {
   name: "products-table",
+
+  components: {
+    Actions,
+    Pagination
+  },
 
   props: {
     columns: {
@@ -91,6 +85,10 @@ export default {
       default: () => {
         [];
       }
+    },
+    pagination: {
+      type: Object,
+      default: () => ({})
     }
   },
 
@@ -100,11 +98,38 @@ export default {
       sort: {
         field: "id",
         type: "desc"
-      }
+      },
+      selected: []
     };
   },
 
+  computed: {
+    isChecked() {
+      return this.data.reduce((a, row) => {
+        return {
+          ...a,
+          [row.id]: !!this.selected.find(
+            rowSelected => rowSelected.id == row.id
+          )
+        };
+      }, {});
+    }
+  },
+
   methods: {
+    onChangePage(page) {
+      this.$emit("change-page", page);
+    },
+    onToggleSelected(row) {
+      const exist = this.selected.find(item => item.id == row.id);
+      if (!exist) {
+        this.selected = [...this.selected, row];
+        this.$emit("select", this.selected);
+        return;
+      }
+      this.selected = [...this.selected.filter(item => item.id != row.id)];
+      this.$emit("select", this.selected);
+    },
     onSort(column) {
       if (this.sort.field == column.field) {
         if (this.sort.type == "asc") {
@@ -127,6 +152,15 @@ export default {
       };
 
       this.$emit("sort", this.sort);
+    },
+    onSelectAll(toggle) {
+      if (toggle) {
+        this.selected = [...this.data];
+        this.$emit("select", this.selected);
+        return;
+      }
+      this.selected = [];
+      this.$emit("select", this.selected);
     }
   }
 };
@@ -156,11 +190,71 @@ export default {
 }
 
 .image-product {
-  width: 80px;
+  width: 65px;
+  height: 65px;
 
   img {
     width: 100%;
     object-fit: cover;
   }
+}
+
+.centered {
+  text-align: center;
+}
+
+.status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .Shipped {
+    color: #21d196;
+  }
+
+  .Unshipped {
+  }
+
+  .warning {
+    color: #e16813;
+  }
+
+  .Canceled {
+    color: #d12121;
+  }
+}
+
+tbody {
+  tr {
+    vertical-align: middle;
+  }
+}
+
+.sku {
+  margin-left: 15px;
+}
+
+.who,
+.sku {
+  color: #b0b4b9;
+}
+
+.title {
+  margin-bottom: 8px;
+  white-space: normal;
+}
+
+.stock {
+  &.correct {
+    color: #21d196;
+  }
+
+  &.incorrect {
+    color: #d12121;
+  }
+}
+
+.profit {
+  color: #21d196;
 }
 </style>

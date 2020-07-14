@@ -1,0 +1,10 @@
+$default-color: #601ed1;
+$default-gradient: #6a11cb;
+
+a {
+  color: $default-color;
+}
+
+.bg-primary {
+  background: $default-gradient !important;
+}

@@ -5,6 +5,9 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+import Sidebar from '@/plugins/sidebar'
+Vue.use(Sidebar)
+
 new Vue({
   store,
   router,
