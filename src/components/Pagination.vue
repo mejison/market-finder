@@ -18,7 +18,7 @@
         >
           <a class="page-link" href="#">{{ index + 1 }}</a>
         </li>
-        <li class="page-item" :class="{ 'disabled': ! canNext }" :disabled=" ! canNext">
+        <li class="page-item" :class="{ 'disabled': ! canNext }" :disabled="! canNext">
           <a class="page-link" href="#" @click.prevent="onClickNext">
             <i class="fas fa-angle-right"></i>
             <span class="sr-only">Next</span>
@@ -65,7 +65,7 @@ export default {
       return [...new Array(Math.ceil(this.total / this.perPage))];
     },
     canNext() {
-      return this.page == this.pages.length - 1;
+      return this.page != this.pages.length;
     },
     canPrev() {
       return this.page > 1;

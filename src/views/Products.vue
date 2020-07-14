@@ -2,7 +2,7 @@
   <div class="col">
     <div class="card">
       <div class="card-header border-0 d-flex align-items-center justify-content-between">
-        <product-filters
+        <order-filters
           :can-do-actions="!!selected.length"
           @change-per-page="onChangePerPage"
           @search="onSearch"
@@ -16,6 +16,7 @@
         :pagination="pagination"
         @select="onSelect"
         @change-page="onChangePage"
+        @action="onAction"
       >
         <template v-slot:status="{ row }">
           <div class="status">
@@ -68,12 +69,24 @@
           </div>
         </template>
       </product-table>
+
+      <div class="order-details" :class="{'show': Object.keys(currentOrder).length}">
+        <div class="header">
+          <a href="#" @click="onCloseDetails">
+            <i class="fas fa-chevron-left"></i>
+            back to the list
+          </a>
+        </div>
+        <div class="details-body">
+          <order-details :order="currentOrder" @close="onCloseDetails"></order-details>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ProductTable, ProductFilters } from "@/components";
+import { ProductTable, OrderFilters, OrderDetails } from "@/components";
 import { mapActions, mapGetters } from "vuex";
 
 import swal from "sweetalert2";
@@ -84,12 +97,19 @@ export default {
 
   components: {
     ProductTable,
-    ProductFilters
+    OrderFilters,
+    OrderDetails
   },
 
   methods: {
     ...mapActions("orders", ["getOrders", "deleteOrder"]),
     ...mapActions("auth", ["login"]),
+    onCloseDetails() {
+      this.currentOrder = {};
+    },
+    onAction(order) {
+      this.currentOrder = order;
+    },
     onDelete() {
       const deletingCount = this.selected.length;
       let finishedDeleting = 0;
@@ -220,7 +240,8 @@ export default {
           changed: {
             date: order.last_modified_at,
             who: "Xavier Guy"
-          }
+          },
+          ...order
         };
       });
     }
@@ -229,6 +250,7 @@ export default {
   data() {
     return {
       selected: [],
+      currentOrder: {},
       filter: {
         page: 1,
         per_page: 10
@@ -318,3 +340,59 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.order-details {
+  position: fixed;
+  background-color: #fff;
+  z-index: 999;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  transform: translateX(100%);
+  transition: transform 0.3s;
+  width: calc(80vw);
+
+  .details-body {
+    background: #f8f9fe;
+    padding: 15px 30px;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .header {
+    padding: 30px 24px;
+    border-bottom: 1px solid #f8f9fe;
+    font-size: 13px;
+    font-weight: bold;
+    color: #601ed1;
+    text-transform: uppercase;
+
+    a {
+      display: flex;
+      align-items: center;
+
+      .fas {
+        margin-right: 15px;
+        font-size: 30px;
+      }
+    }
+  }
+
+  &.show {
+    transform: translateX(0);
+
+    &:after {
+      content: "";
+      position: absolute;
+      z-index: 999;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      transform: translateX(-100%);
+      width: calc(20vw);
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+</style>

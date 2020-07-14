@@ -1,9 +1,7 @@
 <template>
   <side-bar>
     <template slot="links">
-      <sidebar-item
-        :link="{ name: 'Research', icon: 'ni ni-ungroup text-orange', collapsed: false }"
-      >
+      <sidebar-item :link="{ name: 'Research', icon: 'fas fa-search', collapsed: false }">
         <sidebar-item
           :link="{
             name: 'Products Research',
@@ -23,9 +21,7 @@
           }"
         ></sidebar-item>
       </sidebar-item>
-      <sidebar-item
-        :link="{ name: 'Prepare', icon: 'ni ni-ungroup text-orange', collapsed: false }"
-      >
+      <sidebar-item :link="{ name: 'Prepare', icon: 'fas fa-list-ul', collapsed: false }">
         <sidebar-item
           :link="{
             name: 'Saved Products',
@@ -39,7 +35,7 @@
           }"
         ></sidebar-item>
       </sidebar-item>
-      <sidebar-item :link="{ name: 'Sell', icon: 'ni ni-ungroup text-orange', collapsed: false }">
+      <sidebar-item :link="{ name: 'Sell', icon: 'fas fa-shopping-cart', collapsed: false }">
         <sidebar-item
           :link="{
             name: 'Your lists',

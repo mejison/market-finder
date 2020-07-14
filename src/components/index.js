@@ -1,11 +1,13 @@
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
-import ProductTable from './products/Table'
-import ProductFilters from './products/Filters'
+import ProductTable from './Table'
+import OrderFilters from './products/Filters'
+import OrderDetails from './products/Details'
 
 export {
   Sidebar,
   Navbar,
   ProductTable,
-  ProductFilters
+  OrderFilters,
+  OrderDetails,
 }

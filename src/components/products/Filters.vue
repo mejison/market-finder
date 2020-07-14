@@ -21,7 +21,7 @@
     </div>
     <div class="actions" v-if="canDoActions">
       <button class="btn btn-success btn-sm">
-        <i class="fas fa-panil"></i>
+        <i class="fas fa-pencil-alt"></i>
         Edit Listings
       </button>
       <button class="btn btn-success btn-sm">

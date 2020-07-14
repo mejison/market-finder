@@ -40,7 +40,9 @@
               <div v-else>{{ row[column.field] }}</div>
             </th>
             <td>
-              <actions />
+              <div class="actions">
+                <a href="#" @click="onAction(row)">...</a>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -62,14 +64,12 @@
 
 <script>
 import icons from "@/icons";
-import Actions from "./Actions.vue";
-import Pagination from "./Pagination.vue";
+import Pagination from "@/components/Pagination.vue";
 
 export default {
-  name: "products-table",
+  name: "table-custom",
 
   components: {
-    Actions,
     Pagination
   },
 
@@ -117,6 +117,9 @@ export default {
   },
 
   methods: {
+    onAction(row) {
+      this.$emit("action", row);
+    },
     onChangePage(page) {
       this.$emit("change-page", page);
     },
@@ -256,5 +259,24 @@ tbody {
 
 .profit {
   color: #21d196;
+}
+
+.actions {
+  width: 30px;
+  height: 20px;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11),
+    0 1px 3px 0 rgba(0, 0, 0, 0.08);
+  background-color: #21d196;
+  position: relative;
+
+  a {
+    font-size: 18px;
+    color: #fff;
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 </style>
