@@ -4,7 +4,7 @@
       <table class="table align-items-center table-flush">
         <thead class="thead-light">
           <tr>
-            <th>
+            <th v-if="isSelectable">
               <input type="checkbox" @change="onSelectAll($event.target.checked)" />
             </th>
             <th
@@ -23,12 +23,12 @@
                 class="sort-icon"
               ></a>
             </th>
-            <th>Actions</th>
+            <th v-if="isActions">Actions</th>
           </tr>
         </thead>
         <tbody class="list">
           <tr v-for="(row, index) in data" :key="index">
-            <td>
+            <td v-if="isSelectable">
               <input type="checkbox" :checked="isChecked[row.id]" @click="onToggleSelected(row)" />
             </td>
             <th
@@ -39,7 +39,7 @@
               <slot v-if="column.styled" :name="column.field" :row="row" :data="row[column.field]"></slot>
               <div v-else>{{ row[column.field] }}</div>
             </th>
-            <td>
+            <td v-if="isActions">
               <div class="actions">
                 <a href="#" @click="onAction(row)">...</a>
               </div>
@@ -50,6 +50,7 @@
     </div>
 
     <pagination
+      v-if="isPagination"
       :total="pagination.total"
       :page="pagination.page"
       :from="pagination.from"
@@ -89,6 +90,18 @@ export default {
     pagination: {
       type: Object,
       default: () => ({})
+    },
+    isActions: {
+      type: Boolean,
+      default: false
+    },
+    isPagination: {
+      type: Boolean,
+      default: false
+    },
+    isSelectable: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -206,6 +219,14 @@ export default {
   text-align: center;
 }
 
+.fa-check-circle {
+  color: #21d196;
+}
+
+.fa-exclamation-circle {
+  color: #d12121;
+}
+
 .status {
   display: flex;
   justify-content: center;
@@ -262,21 +283,19 @@ tbody {
 }
 
 .actions {
-  width: 30px;
-  height: 20px;
-  border-radius: 4px;
-  box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11),
-    0 1px 3px 0 rgba(0, 0, 0, 0.08);
-  background-color: #21d196;
-  position: relative;
-
   a {
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px 0 rgba(50, 50, 93, 0.11),
+      0 1px 3px 0 rgba(0, 0, 0, 0.08);
+    background-color: #21d196;
+    position: relative;
     font-size: 18px;
     color: #fff;
-    position: absolute;
-    top: 22%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    text-align: center;
+    line-height: 10px;
   }
 }
 </style>

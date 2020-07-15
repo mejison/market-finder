@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="actions" v-if="canDoActions">
-      <button class="btn btn-success btn-sm">
+      <button class="btn btn-success btn-sm" @click="onEdit">
         <i class="fas fa-pencil-alt"></i>
         Edit Listings
       </button>
@@ -72,6 +72,9 @@ export default {
   },
 
   methods: {
+    onEdit() {
+      this.$emit("edit");
+    },
     onDelete() {
       swal
         .fire({

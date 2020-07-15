@@ -3,6 +3,12 @@ $default-gradient: #6a11cb;
 
 a {
   color: $default-color;
+  font-size: 13px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.08;
+  letter-spacing: normal;  
 }
 
 .bg-primary {
@@ -44,4 +50,27 @@ a {
   .sidenav-toggler-line {
     background-color: #601ed1;
   }
+}
+
+// modals
+
+.modal {  
+  background-color: rgba(59, 50, 74, 0.8);
+  justify-content: center;
+  align-items: center;
+
+  .modal-title {
+    font-size: 24px;
+    font-weight: 600;    
+    color: #32325d;
+  }
+
+  .modal-dialog {
+    max-width: 780px;
+  }
+}
+
+// forms
+.form-control:disabled, .form-control[readonly] {    
+  background-color: #f4f5f7;
 }

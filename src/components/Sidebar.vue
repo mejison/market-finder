@@ -5,7 +5,7 @@
         <sidebar-item
           :link="{
             name: 'Products Research',
-            path: '/products/research'
+            path: '/products-research'
           }"
         ></sidebar-item>
         <sidebar-item

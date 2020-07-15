@@ -1,5 +1,7 @@
 import Products from './Products'
+import Lister from './Lister'
 
 export {
-  Products
+  Products,
+  Lister,
 }

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { Products } from '@/views'
+import { Products, Lister } from '@/views'
 import { Public } from '@/layouts'
 
 Vue.use(VueRouter)
@@ -12,13 +12,21 @@ const routes = [
     component: Public,
     children: [
       {
-        name: 'products',
+        name: 'products-items',
         path: '/',
         component: Products,
         meta: {
           title: 'Producs'
-        }
+        },
       },
+      {
+        path: 'products-research',
+        name: 'products-research',
+        meta: {
+          title: 'Product Lister'
+        },
+        component: Lister,
+      }
     ]
   },
 ]
