@@ -1,6 +1,10 @@
 <template>
   <div class="btn-wrapper">
-    <button :class="`btn btn-${type}`">
+    <button
+      :class="`btn btn-${type} ${disabled ? 'disabled': ''}`"
+      :disabled="disabled"
+      @click="onClick"
+    >
       <slot></slot>
     </button>
   </div>
@@ -14,6 +18,16 @@ export default {
     type: {
       type: String,
       default: "default"
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  methods: {
+    onClick(e) {
+      this.$emit("click", e);
     }
   }
 };

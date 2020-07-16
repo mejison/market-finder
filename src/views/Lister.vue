@@ -1,13 +1,25 @@
 <template>
   <div class="col">
-    <div class="card">
-      <div class="card-header border-0 d-flex align-items-center justify-content-between">asdf</div>
+    <div class="row">
+      <div class="col">
+        <lister-wizard />
+      </div>
+      <div class="col col-lg-4">
+        <bulk-uploads />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { ListerWizard, BulkUploads } from "@/components";
+
 export default {
-  name: "lister"
+  name: "lister",
+
+  components: {
+    ListerWizard,
+    BulkUploads
+  }
 };
 </script>
