@@ -5,6 +5,7 @@
       type="text"
       v-model="payload"
       class="form-control"
+      @input="onChange"
       :readonly="disabled"
       :class="{'readonly': disabled}"
       :placeholder="placeholder"
