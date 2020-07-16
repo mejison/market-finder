@@ -2,7 +2,7 @@
   <div class="bulk-uploads-wrapper">
     <div class="card">
       <stepper :step="step" :steps="steps" />
-      <finder :step="step" @next="onNext" @prev="onPrev" />
+      <finder :step="step" :steps="steps" @next="onNext" @prev="onPrev" @finish="onFinish" />
     </div>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
 
   data() {
     return {
-      step: 2,
+      step: 1,
       steps: [
         {
           label: "asin & source",
@@ -49,6 +49,9 @@ export default {
       if (this.step != this.steps.length) {
         this.step++;
       }
+    },
+    onFinish() {
+      console.log("finish submit");
     },
     onPrev() {
       if (this.step != 1) {

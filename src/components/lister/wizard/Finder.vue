@@ -11,7 +11,8 @@
       <div class="ml-auto d-flex">
         <btn type="outline-success mr-3" v-if="step == 1" @click="onCalc">Calculate</btn>
         <btn type="outline-success mr-3" v-if="step > 1" @click="onPrev">Previous</btn>
-        <btn type="success" @click="onNext" :disabled=" ! canNext">Next</btn>
+        <btn type="success" @click="onNext" v-if="step != steps.length" :disabled=" ! canNext">Next</btn>
+        <btn type="success" @click="onFinish" v-if="step == steps.length">Finish</btn>
       </div>
     </div>
   </div>
@@ -31,6 +32,12 @@ export default {
     step: {
       type: Number,
       default: 1
+    },
+    steps: {
+      type: Array,
+      default: () => {
+        [];
+      }
     }
   },
 
@@ -72,13 +79,13 @@ export default {
         markup: "22,62",
         profit: "22,62",
         profit_margin: "22,62",
-        markup_percent: "22,62"
+        markup_percent: "22,62",
+        min_profit: "5,29",
+        repricing_strategy: "1",
+        shipping_delay: "7",
+        shipping_template: "1"
       }
     };
-  },
-
-  mounted() {
-    this.current = this.products[0];
   },
 
   computed: {
@@ -96,6 +103,9 @@ export default {
   },
 
   methods: {
+    onFinish() {
+      this.$emit("finish");
+    },
     onPrev() {
       this.$emit("prev");
     },

@@ -17,6 +17,13 @@
         </div>
       </div>
     </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col d-flex justify-content-center mt-5">
+          <img src="/assets/img/unnamed.jpg" alt="amazon" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

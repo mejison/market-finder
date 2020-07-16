@@ -6,11 +6,13 @@
       </div>
       <input
         type="text"
+        @click="onClick"
         v-model="payload"
         class="form-control"
         :readonly="disabled"
         :class="{'readonly': disabled}"
         :placeholder="placeholder"
+        @focus="onFocus"
       />
       <div class="input-group-append" @click="onClick" v-if="position == 'right'">
         <span class="input-group-text">{{ label }}</span>
@@ -61,6 +63,9 @@ export default {
   methods: {
     onClick() {
       this.$emit("click", this.payload);
+    },
+    onFocus() {
+      this.$emit("focus");
     }
   }
 };

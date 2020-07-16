@@ -1,5 +1,5 @@
 <template>
-  <div class="home-depot-pricing-qty-wrapper">
+  <div class="home-depot-shipping-wrapper">
     <div class="form-group d-flex">
       <div class="img-prod mr-2">
         <img :src="product.image" alt="alt" class="img-thumbnail" />
@@ -12,36 +12,37 @@
     <div>
       <div class="form-group">
         <div class="row">
-          <div class="col selling-price">
-            <span class="cost">
-              Cost at
-              <a href="#">Home Depot</a>
-              : {{ product.cost }}
-            </span>
-            <text-field label="Selling Price" v-model="product.selling_price" />
-          </div>
-          <div class="col-lg-4">
-            <text-field label="Quantity" v-model="product.qty" />
+          <div class="col">
+            <dropdown
+              label="Shipping Template"
+              :options="templatesOptions"
+              v-model="product.shipping_template"
+            />
           </div>
         </div>
       </div>
       <div class="form-group">
         <div class="row">
           <div class="col">
-            <text-field label="Markup" v-model="product.markup" />
-          </div>
-          <div class="col">
-            <text-field label="Profit" v-model="product.profit" />
+            <text-field label="Shipping Delay" v-model="product.shipping_delay" />
           </div>
         </div>
       </div>
       <div class="form-group">
         <div class="row">
           <div class="col">
-            <text-field label="Markup (%)" v-model="product.markup_percent" />
+            <dropdown
+              label="Repricing Strategy"
+              :options="repricingStrateOptions"
+              v-model="product.repricing_strategy"
+            />
           </div>
           <div class="col">
-            <text-field label="Profit Margin (%)" v-model="product.profit_margin" />
+            <text-field-with-dropdown
+              label="Min Profit"
+              v-model="product.min_profit"
+              :options="currOptions"
+            />
           </div>
         </div>
       </div>
@@ -50,13 +51,15 @@
 </template>
 
 <script>
-import { TextField } from "@/components";
+import { TextField, TextFieldWithDropdown, Dropdown } from "@/components";
 
 export default {
-  name: "home-depot-pricing-qty",
+  name: "home-depot-shipping",
 
   components: {
-    TextField
+    TextField,
+    Dropdown,
+    TextFieldWithDropdown
   },
 
   props: {
@@ -64,12 +67,39 @@ export default {
       type: Object,
       default: () => ({})
     }
+  },
+
+  data() {
+    return {
+      repricingStrateOptions: [
+        {
+          name: "Beat Lowest - Min Profit",
+          value: 1
+        }
+      ],
+      templatesOptions: [
+        {
+          name: "AMZ FREE",
+          value: 1
+        }
+      ],
+      currOptions: [
+        {
+          name: "$",
+          value: "$"
+        },
+        {
+          name: "€",
+          value: "€"
+        }
+      ]
+    };
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.home-depot-pricing-qty-wrapper {
+.home-depot-shipping-wrapper {
   h1 {
     font-size: 18px;
     font-weight: bold;
