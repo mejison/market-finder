@@ -4,7 +4,7 @@
       <amazon-puller @pull="onPull" />
     </div>
     <div class="right">
-      <product-source :source="source" />
+      <product-source :source="product.source" />
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
   },
 
   props: {
-    source: {
+    product: {
       type: Object,
       default: () => ({})
     }

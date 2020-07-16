@@ -1,6 +1,12 @@
 <template>
   <div class="finder-wrapper">
-    <component :is="getStep" :source="current.source" @pull="onPull" @next="onNext"></component>
+    <component
+      :is="getStep"
+      :product="current"
+      :product-home-depot="currentHomeDepot"
+      @pull="onPull"
+      @next="onNext"
+    ></component>
     <div class="form-group d-flex">
       <div class="ml-auto d-flex">
         <btn type="outline-success mr-3" v-if="step == 1" @click="onCalc">Calculate</btn>
@@ -39,7 +45,12 @@ export default {
     return {
       products: [
         {
-          title: "iLive IHB613B Audio CD Micro System with Bluetooth and FM",
+          name: "Jonard Tools FTS-240 Fish Tape, 240'",
+          bsr: "821243",
+          category: "Tools & Home Improvement",
+          sales_per_day: "0 - 1 sales /day",
+          total_offers: "14+",
+          lowest_offer_price: "$93.96",
           image: "/assets/img/product-image.jpg",
           asin: "B00BCSYZMS",
           source: {
@@ -51,8 +62,23 @@ export default {
           }
         }
       ],
-      current: {}
+      current: {},
+      currentHomeDepot: {
+        name: "Jonard 1/8 in. x 240 ft. Steel Fish Tape",
+        image: "/assets/img/product-image.jpg",
+        selling_price: "108,33",
+        cost: "$85.71",
+        qty: "5",
+        markup: "22,62",
+        profit: "22,62",
+        profit_margin: "22,62",
+        markup_percent: "22,62"
+      }
     };
+  },
+
+  mounted() {
+    this.current = this.products[0];
   },
 
   computed: {
