@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { Products, Lister } from '@/views'
+import { Products, Lister, Viewer, NotFound } from '@/views'
 import { Public } from '@/layouts'
 
 Vue.use(VueRouter)
@@ -20,15 +20,28 @@ const routes = [
         },
       },
       {
-        path: 'products-research',
-        name: 'products-research',
+        path: 'products-lister',
+        name: 'products-lister',
         meta: {
           title: 'Product Lister'
         },
         component: Lister,
+      },
+      {
+        path: 'products-viewer',
+        name: 'product-viewer',
+        meta: {
+          title: 'Product Viewer'
+        },
+        component: Viewer,
       }
     ]
   },
+  {
+    path: '*',
+    name: '404',
+    component: NotFound
+  }
 ]
 
 const router = new VueRouter({

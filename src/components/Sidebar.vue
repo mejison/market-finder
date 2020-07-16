@@ -4,20 +4,14 @@
       <sidebar-item :link="{ name: 'Research', icon: 'fas fa-search', collapsed: false }">
         <sidebar-item
           :link="{
-            name: 'Products Research',
-            path: '/products-research'
+            name: 'Products Lister',
+            path: '/products-lister'
           }"
         ></sidebar-item>
         <sidebar-item
           :link="{
-            name: 'Sellers Research',
-            path: '/sellers/research'
-          }"
-        ></sidebar-item>
-        <sidebar-item
-          :link="{
-            name: 'Scrapping Tasks',
-            path: '/tasks'
+            name: 'Product Viewer',
+            path: '/products-viewer'
           }"
         ></sidebar-item>
       </sidebar-item>
@@ -25,13 +19,7 @@
         <sidebar-item
           :link="{
             name: 'Saved Products',
-            path: '/products/saved'
-          }"
-        ></sidebar-item>
-        <sidebar-item
-          :link="{
-            name: 'Manage sources',
-            path: '/sources'
+            path: '/'
           }"
         ></sidebar-item>
       </sidebar-item>
