@@ -46,7 +46,7 @@ export default {
     return {
       nav: {
         asin: "",
-        source_url: "",
+        source_url: "https://www.homedepot.com/p/304345220",
         variation: "",
         quantity: ""
       }
