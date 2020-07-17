@@ -18,6 +18,9 @@ import ProductOffers from './viewer/Offers'
 import HomeDepotView from './viewer/HomeDepotView'
 import AmazonView from './viewer/AmazonView'
 import StartPageViewer from './viewer/Start'
+import CardCalc from './dashboard/CardCalc';
+import BoxCalc from './dashboard/BoxCalc';
+import DateRange from './dashboard/DateRange'
 
 export {
   Btn,
@@ -40,4 +43,7 @@ export {
   HomeDepotView,
   AmazonView,
   StartPageViewer,
+  CardCalc,
+  BoxCalc,
+  DateRange,
 }

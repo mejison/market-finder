@@ -19,7 +19,7 @@
         <sidebar-item
           :link="{
             name: 'Saved Products',
-            path: '/'
+            path: '/products-items'
           }"
         ></sidebar-item>
       </sidebar-item>
