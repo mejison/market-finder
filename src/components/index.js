@@ -21,6 +21,9 @@ import StartPageViewer from './viewer/Start'
 import CardCalc from './dashboard/CardCalc';
 import BoxCalc from './dashboard/BoxCalc';
 import DateRange from './dashboard/DateRange'
+import DashboardOrders from './dashboard/Orders'
+import TopSelling from './dashboard/TopSelling'
+import GraphSales from './dashboard/GraphSales'
 
 export {
   Btn,
@@ -46,4 +49,7 @@ export {
   CardCalc,
   BoxCalc,
   DateRange,
+  DashboardOrders,
+  TopSelling,
+  GraphSales,
 }

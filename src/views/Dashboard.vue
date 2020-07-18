@@ -7,6 +7,14 @@
         </div>
       </div>
       <div class="row">
+        <div class="col">
+          <graph-sales :data="graphSales" />
+        </div>
+        <div class="col">
+          <top-selling :columns="topSellingColumns" :data="topSellingData" />
+        </div>
+      </div>
+      <div class="row">
         <div class="col" v-for="(box, index) in boxes" :key="index">
           <box-calc :data="box" />
         </div>
@@ -16,12 +24,26 @@
           <date-range />
         </div>
       </div>
+      <div class="row">
+        <div class="col">
+          <div>
+            <dashboard-orders />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { BoxCalc, CardCalc, DateRange } from "@/components";
+import {
+  BoxCalc,
+  CardCalc,
+  DateRange,
+  DashboardOrders,
+  GraphSales,
+  TopSelling
+} from "@/components";
 
 export default {
   name: "dashboard",
@@ -29,11 +51,69 @@ export default {
   components: {
     CardCalc,
     BoxCalc,
-    DateRange
+    DateRange,
+    DashboardOrders,
+    GraphSales,
+    TopSelling
   },
 
   data() {
     return {
+      topSellingColumns: [
+        {
+          label: "",
+          field: "image",
+          styled: true
+        },
+        {
+          label: "Product",
+          field: "product",
+          styled: true
+        },
+        {
+          label: "Number of sales",
+          field: "number_of_sales",
+          styled: true
+        }
+      ],
+      topSellingData: [
+        {
+          name: "iLive IHB613B Audio CD Micro System with Bluetooth and FM",
+          image: "//placehold.it/150",
+          article: "B00BCSYZMS",
+          sku: "SKU: KG-KWL1-4017",
+          number_of_sales: "55"
+        },
+        {
+          name: "iLive IHB613B Audio CD Micro System with Bluetooth and FM",
+          image: "//placehold.it/150",
+          article: "B00BCSYZMS",
+          sku: "SKU: KG-KWL1-4017",
+          number_of_sales: "32"
+        },
+        {
+          name: "iLive IHB613B Audio CD Micro System with Bluetooth and FM",
+          image: "//placehold.it/150",
+          article: "B00BCSYZMS",
+          sku: "SKU: KG-KWL1-4017",
+          number_of_sales: "30"
+        },
+        {
+          name: "iLive IHB613B Audio CD Micro System with Bluetooth and FM",
+          image: "//placehold.it/150",
+          article: "B00BCSYZMS",
+          sku: "SKU: KG-KWL1-4017",
+          number_of_sales: "21"
+        },
+        {
+          name: "iLive IHB613B Audio CD Micro System with Bluetooth and FM",
+          image: "//placehold.it/150",
+          article: "B00BCSYZMS",
+          sku: "SKU: KG-KWL1-4017",
+          number_of_sales: "17"
+        }
+      ],
+      graphSales: [],
       cards: [
         {
           title: "Profit since last day",
@@ -154,6 +234,12 @@ export default {
         }
       ]
     };
+  },
+
+  methods: {
+    onSelect() {},
+    onChangePage() {},
+    onAction() {}
   }
 };
 </script>
